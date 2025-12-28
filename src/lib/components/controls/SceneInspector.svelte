@@ -106,7 +106,7 @@
 				<RefreshCw class="h-4 w-4" />
 			</Button>
 
-			<CollapsibleTrigger asChild>
+			<CollapsibleTrigger>
 				<Button
 					variant="secondary"
 					size="icon"
@@ -242,12 +242,13 @@
 											</span>
 										</div>
 										<Slider
-											value={[(selected as THREE.PerspectiveCamera).fov]}
+											type="single"
+											value={(selected as THREE.PerspectiveCamera).fov}
 											min={20}
 											max={120}
 											step={1}
-											onValueChange={(v: unknown[]) => {
-												(selected as THREE.PerspectiveCamera).fov = num(v[0]);
+											onValueChange={(v: number) => {
+												(selected as THREE.PerspectiveCamera).fov = v;
 												(selected as THREE.PerspectiveCamera).updateProjectionMatrix();
 											}}
 										/>
