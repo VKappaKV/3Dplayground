@@ -1,5 +1,6 @@
 <script lang="ts">
-	import SceneInspector from '$lib/components/controls/SceneInspector.svelte';
+	import Notes from '$lib/components/overlays/Notes.svelte';
+	import SceneInspector from '$lib/components/overlays/SceneInspector.svelte';
 	import { onMount } from 'svelte';
 	import * as THREE from 'three';
 
@@ -36,4 +37,5 @@
 <div class="relative h-screen w-full">
 	<div bind:this={container} class="h-screen w-full"></div>
 	<SceneInspector {scene} />
+	<Notes />
 </div>
