@@ -2,8 +2,10 @@
 	import SceneInspector from '$lib/components/overlays/SceneInspector.svelte';
 	import { onMount } from 'svelte';
 	import * as THREE from 'three';
+	import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 	let container: HTMLDivElement | undefined = $state();
+	let controls: OrbitControls | null = null;
 
 	const scene = new THREE.Scene();
 
@@ -22,13 +24,19 @@
 
 	function animate() {
 		requestAnimationFrame(animate);
-		cube.rotation.x += 0.01;
-		cube.rotation.y += 0.01;
+		if (!controls) {
+			console.log('no controls');
+			return;
+		}
+		controls.update();
 		renderer.render(scene, camera);
 	}
 
 	onMount(() => {
 		container?.appendChild(renderer.domElement);
+		controls = new OrbitControls(camera, container);
+		controls.enableDamping = true;
+		controls.autoRotate = true;
 		animate();
 	});
 </script>
